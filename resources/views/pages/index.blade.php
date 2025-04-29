@@ -1,3 +1,4 @@
 <x-layout>
-    <p>This shit's workin???fdfdfd</p>
+    <x-header-banner />
+    <p>This shit's workin???</p>
 </x-layout>
