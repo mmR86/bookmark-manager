@@ -10,6 +10,16 @@
     <title>Bookmark Manager</title>
 </head>
 <body class="bg-gray-100">
+    <x-nav />
+    <main>
+    {{-- Alert messages --}}
+    @if(session('success'))
+        <x-alert type='success' message="{{session('success')}}" />
+    @endif
+    @if(session('error'))
+        <x-alert type='error' message="{{session('error')}}" />
+    @endif
     {{$slot}}
+    </main>
 </body>
 </html>

@@ -26,7 +26,7 @@ class LoginController extends Controller
             // Regenerate the session to prevent fixation attacks
             $request->session()->regenerate();
 
-            return redirect()->intended(route('dashboard'))->with('success', 'You are logged in');
+            return redirect()->intended(route('dashboard'))->with('success', 'You are logged in!');
         }
 
         //If auth fails redirect back with error
@@ -44,7 +44,7 @@ class LoginController extends Controller
         //Regenerate CSRF token
         $request->session()->regenerateToken();
 
-        return redirect('/');
+        return redirect('/')->with('success', 'You logged out!');
     }
     
 }

@@ -1,5 +1,5 @@
 <x-layout>
-    <x-nav />
+    
     <x-header-banner h1='Login'/>
     <div class="flex justify-center items-center">
         <div class="bg-white rounded-lg shadow md w-md md:max-w-xlmx-auto mt-12 p-8 py-12">
