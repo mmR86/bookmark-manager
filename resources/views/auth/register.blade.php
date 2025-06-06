@@ -2,7 +2,7 @@
     
     <x-header-banner h1='Register'/>
     <div class="flex justify-center items-center">
-        <div class="bg-white rounded-lg shadow md w-md md:max-w-xlmx-auto mt-3 p-6 mb-3">
+        <div class="bg-white rounded-lg shadow md w-md md:max-w-xlmx-auto mt-8 p-6 mb-8">
             <form method="POST" action="{{route('register.store')}}">
                 @csrf
                 <x-text id="name" name="name" placeholder="Full Name" />
