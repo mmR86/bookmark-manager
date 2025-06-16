@@ -3,6 +3,8 @@
       @auth
       <x-logout-button />
       <x-nav-link url='/dashboard' :active="request()->is('dashboard')">Dashboard</x-nav-link>
+      <x-nav-link url='/bookmarks' :active="request()->is('bookmarks')">Bookmarks</x-nav-link>
+      <x-nav-link url='/bookmarks/create' :active="request()->is('bookmarks/create')">Create a Bookmark</x-nav-link>
       @else
       <x-nav-link url='/login' :active="request()->is('login')">Login</x-nav-link>
       <x-nav-link url='/register' :active="request()->is('register')">Register</x-nav-link>

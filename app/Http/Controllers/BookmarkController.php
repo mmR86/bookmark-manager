@@ -11,7 +11,7 @@ class BookmarkController extends Controller
      */
     public function index()
     {
-        //
+        return view('bookmarks.index');
     }
 
     /**
@@ -19,7 +19,7 @@ class BookmarkController extends Controller
      */
     public function create()
     {
-        //
+        return view('bookmarks.create');
     }
 
     /**
