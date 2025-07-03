@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Support\Facades\Http;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 
 class BookmarkController extends Controller
@@ -25,9 +27,13 @@ class BookmarkController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(Request $request): RedirectResponse
     {
-        //
+        //Get fetched metadata with microlink
+        $fetchedMeta = Http::get('https://api.microlink.io', [
+            'url' => $request->url])->json('data');
+        
+        dd($fetchedMeta);
     }
 
     /**
