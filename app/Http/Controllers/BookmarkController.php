@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers;
 
+
 use Illuminate\Support\Facades\Http;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use App\Services\BookmarkDataMapperService;
 
 class BookmarkController extends Controller
 {
@@ -29,11 +31,36 @@ class BookmarkController extends Controller
      */
     public function store(Request $request): RedirectResponse
     {
+        //Validate the input
+        $request->validate([
+            'url' => 'required|url|max:2048'
+        ]);
+
         //Get fetched metadata with microlink
-        $fetchedMeta = Http::get('https://api.microlink.io', [
-            'url' => $request->url])->json('data');
+        $response = Http::get('https://api.microlink.io', [
+            'url' => $request->url]);
+
+        //chech for API errors
+        if(!$response->successful()) {
+            return back()->withErrors(['url' => 'Unable to fetch data from the URL']);
+        }
+
+        $fetchedMetaToJson = $response->json('data');
+
+        //Validate the data from the API
+        $validatedData = validator($fetchedMetaToJson, [
+            'author' => 'nullable|string|max:255',
+            'title' => 'nullable|string|max:255',
+            'publisher' => 'nullable|string|max:255',
+            'image.url' => 'nullable|url|max:2048',
+            'url' => 'required|url|max:2048',
+            'description' => 'nullable|string|max:255',
+            'logo.url' => 'nullable|url|max:2048'
+        ])->validate();
+
+        $mappedData = BookmarkDataMapperService::mapApiData($validatedData);
         
-        dd($fetchedMeta);
+        dd($mappedData);
     }
 
     /**
