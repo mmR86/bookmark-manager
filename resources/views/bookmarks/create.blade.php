@@ -1,3 +1,4 @@
+
 <x-layout>
     
     <x-header-banner h1="Create a Bookmark"/>
@@ -7,7 +8,7 @@
                 @csrf
                 <x-text id="url" name="url" placeholder="URL Adress" type="url" />
             
-               <button class="w-full bg-yellow-200 hover:bg-yellow-400 text-white px-4 py-2 rounded focus:outline-none" type="submit"><p class="text-green-500 font-bold">Login</p></button>
+               <button class="w-full bg-yellow-200 hover:bg-yellow-400 text-white px-4 py-2 rounded focus:outline-none" type="submit"><p class="text-green-500 font-bold">Create</p></button>
             </form>
         </div>
     </div>

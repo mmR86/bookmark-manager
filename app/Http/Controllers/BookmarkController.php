@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-
+use App\Models\Bookmark;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -23,6 +23,7 @@ class BookmarkController extends Controller
      */
     public function create()
     {
+
         return view('bookmarks.create');
     }
 
@@ -35,6 +36,15 @@ class BookmarkController extends Controller
         $request->validate([
             'url' => 'required|url|max:2048'
         ]);
+
+        // Check if the URL already exists for the user
+        $alreadyBookmarked = Bookmark::where('url', $request->url)
+        ->where('user_id', auth()->id())
+        ->exists();
+
+        if ($alreadyBookmarked) {
+        return back()->withErrors(['url' => 'This URL is already bookmarked.']);
+        }
 
         //Get fetched metadata with microlink
         $response = Http::get('https://api.microlink.io', [
@@ -57,10 +67,28 @@ class BookmarkController extends Controller
             'description' => 'nullable|string|max:255',
             'logo.url' => 'nullable|url|max:2048'
         ])->validate();
-
-        $mappedData = BookmarkDataMapperService::mapApiData($validatedData);
         
-        dd($mappedData);
+        //mapp the fetched json data to the columns in DB
+        $mappedData = BookmarkDataMapperService::mapApiData($validatedData);
+
+        //add the current users id
+        $mappedData['user_id'] = auth()->user()->id;
+
+        //check if the url is already bookmarked
+        $canonicalUrl = $mappedData['url'];
+
+        $alreadyBookmarked = Bookmark::where('url', $canonicalUrl)
+            ->where('user_id', auth()->id())
+            ->exists();
+
+        if ($alreadyBookmarked) {
+            return back()->withErrors(['url' => 'This URL is already bookmarked.']);
+        }
+
+        //save to DB
+        Bookmark::create($mappedData);
+        
+        return redirect()->route('bookmarks.index')->with('success', 'Bookmark created');
     }
 
     /**
