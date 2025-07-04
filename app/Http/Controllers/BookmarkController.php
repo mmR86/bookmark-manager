@@ -2,26 +2,31 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Support\Facades\Auth;
 use App\Models\Bookmark;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use App\Services\BookmarkDataMapperService;
+use Illuminate\Contracts\View\View;
 
 class BookmarkController extends Controller
 {
+    
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(): View
     {
-        return view('bookmarks.index');
+        //fetching only the data that has the same user_id as the current logged in user
+        $bookmarks = Bookmark::where('user_id', Auth::id())->get();
+        return view('bookmarks.index', compact('bookmarks'));
     }
 
     /**
      * Show the form for creating a new resource.
      */
-    public function create()
+    public function create(): View
     {
 
         return view('bookmarks.create');
