@@ -1,5 +1,24 @@
-<div class="rounded-lg shadow-md bg-red-100 p-10 m-2">
-    <h2 class="text-xl font-semibold">Title goes here</h2>
-    <p class="text-sm text-gray-500">Description goes here</p>
-    <p class="text-md text-gray-700 mt-4">website</p>
+@props(['bookmark'])
+{{-- Try to do everything with grid --}}
+<div class="rounded-lg shadow-md bg-gray-200 p-10 m-2" >
+    <h2 class="text-xl font-semibold">{{$bookmark->title}}</h2>
+    <div class="flex justify-between" >
+        <div class="flex-col mb-2">
+        <p class="text-m mt-3"><b>Author:</b> {{$bookmark->author}}</p>
+        <div class="flex gap-5">
+            <p class="text-m mt-3"><b>Category:</b> </p>
+            <img src={{$bookmark->logo}} alt={{$bookmark->category}} class="w-12 h-12 rounded-full" />
+        </div>     
+        </div>
+        <div class="flex gap-5 items-center mr-2">
+        <a href="{{$bookmark->url}}"><button class="w-20 bg-yellow-200 hover:bg-yellow-400 text-white px-4 py-2 rounded focus:outline-none" type="submit"><p class="text-green-500 font-bold">Visit</p></button></a>
+         <button class="w-20 bg-red-600 hover:bg-red-800 text-white px-4 py-2 rounded focus:outline-none" type="submit"><p class="text-yellow-200 font-bold">Delete</p></button>
+        </div>
     </div>
+    <div class="flex gap-5">
+        <p class="text-sm text-gray-500">{{$bookmark->description}}</p>
+        <img src={{$bookmark->image}} alt={{$bookmark->description}} class="w-50 rounded-md" />
+    </div>
+    
+    
+</div>
