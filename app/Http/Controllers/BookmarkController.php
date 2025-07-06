@@ -123,8 +123,13 @@ class BookmarkController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(Bookmark $bookmark): RedirectResponse
     {
-        //
+        //check if user is authorized to delete the bookmark
+        $this->authorize('delete', $bookmark);
+
+        $bookmark->delete();
+
+        return redirect()->route('bookmarks.index')->with('success', 'Bookmark deleted successfully!');
     }
 }
