@@ -20,7 +20,17 @@ class BookmarkController extends Controller
     {
         //fetching only the data that has the same user_id as the current logged in user
         $bookmarks = Bookmark::where('user_id', Auth::id())->get();
-        return view('bookmarks.index', compact('bookmarks'));
+
+        //collect all current categories with its logos and put it inside an array as an associative array
+        $results = [];
+        foreach($bookmarks as $bookmark) {
+            $results[] = ['category' => $bookmark->category,
+                            'logo' => $bookmark->logo];
+        }
+
+        $categories = collect($results)->unique();
+
+        return view('bookmarks.index', compact('bookmarks', 'categories'));
     }
 
     /**

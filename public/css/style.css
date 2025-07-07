@@ -19,6 +19,21 @@
     cursor: pointer;
 }
 
+.pos-50 {
+    transform: translateY(-50%);
+}
+
+.cat-btn {
+    transition: transform 0.3s ease, background-color 0.3s ease;
+    cursor: pointer;
+}
+
+.cat-btn:hover {
+    transform: scale(1.165);
+    background-color: rgba(48, 55, 159, 0.85);
+    color: #fff;
+}
+
 /* H1 animation */
 .text-focus-in {
     -webkit-animation: text-focus-in 1s cubic-bezier(0.55, 0.085, 0.68, 0.53)
