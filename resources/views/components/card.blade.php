@@ -1,6 +1,6 @@
 @props(['bookmark'])
 {{-- Try to do everything with grid --}}
-<div class="rounded-lg shadow-md bg-gray-200 p-10 m-2" >
+<div x-show="selectedCategory === 'all' || selectedCategory === '{{$bookmark->category}}'" class="rounded-lg shadow-md bg-gray-200 p-10 m-2" >
     <h2 class="text-xl font-semibold">{{$bookmark->title}}</h2>
     <div class="flex justify-between" >
         <div class="flex-col mb-2">
@@ -22,7 +22,5 @@
     <div class="flex gap-5">
         <p class="text-sm text-gray-500">{{$bookmark->description}}</p>
         <img src={{$bookmark->image}} alt={{$bookmark->description}} class="w-50 rounded-md" />
-    </div>
-    
-    
+    </div>  
 </div>

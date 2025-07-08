@@ -34,6 +34,10 @@
     color: #fff;
 }
 
+/* [x-cloak] {
+    display: none !important;
+} */
+
 /* H1 animation */
 .text-focus-in {
     -webkit-animation: text-focus-in 1s cubic-bezier(0.55, 0.085, 0.68, 0.53)

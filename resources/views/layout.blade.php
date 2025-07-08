@@ -6,7 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     @vite('resources/css/app.css')
     <link rel="stylesheet" href="{{asset('css/style.css')}}">
-    
+    <script src="//unpkg.com/alpinejs" defer></script>
     <title>Bookmark Manager</title>
 </head>
 <body class="bg-gray-100">
